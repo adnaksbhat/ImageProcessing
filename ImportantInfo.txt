@@ -1,0 +1,88 @@
+#Installatons: 
+    In command line:
+        (Make sure python3 is installed)
+        (Make sure pip is installed and updated)
+        pip install opencv           OR      pip install opencv-python
+        pip install numpy
+        pip install matplotlib
+    In VScode:
+        In resources install python.
+--------------------------------------------------------------------------------------------
+
+
+
+Imports:
+    import cv2
+    import numpy as np 
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+Code to read and show image:
+    img=cv2.imread("res/lena.jpg")
+    cv2.imshow("Imm",img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()  
+-------------------------------------------------------------------------------------------- 
+
+
+Code to convert from BGR to RGB:
+    img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+--------------------------------------------------------------------------------------------
+
+
+Colob how to do? :
+    from google.colab import drive
+    drive.mount('/content/drive/')      #to add drive folders or folders containing images to colab
+
+    import cv2
+    from google.colab.patches import cv2_imshow
+    img=cv2.imread("/content/drive/My Drive/DSC_Workshop_OpenCV/res/lena.jpg")  #copy img path
+    cv2_imshow(img)                  #note: here there is no waitkey and destroyAllWindows
+--------------------------------------------------------------------------------------------
+
+
+
+Code to read and display vdo:
+    import numpy as np
+    import cv2
+
+    cap=cv2.VideoCapture('res/30_10fps.avi')  
+                         #cap is a variable to capture vdo
+                         #argument can be 0 if u want to record live vdo from webcam
+
+
+    fcc=cv2.VideoWriter_fourcc('X','V','I','D')
+    output=cv2.VideoWriter('result/30_10fps_HSV.avi',fcc,10.0,(400,200))    
+                        #OPEN the result folder...a vdo is created and its properties hv the frames rate given by u
+                        #400 and 200 is frame width and height
+
+
+    while True:  
+                        #creted infinite loop coz it shld keep running unless u want to end it so
+        ret, frame =cap.read() 
+        frame=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)                                      
+                        #ret is 1 or 0 . it specifies whthr frame is present or absent
+                        #frames are things tht is cpturing
+        
+        
+        cv2.imshow("vdowindow",frame)
+        output.write(frame)
+
+    
+        if cv2.waitKey(1)==27:
+            break                      
+                        #every key in keyoard has values....esc key value is 27...so
+                        # aftr pressing esc vdo will end and while loop will break
+
+    cap.release()    
+    output.release()    
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+
